@@ -8,7 +8,7 @@ public class Chessboard : MonoBehaviour
     [Header("Art Stuff")]
     [SerializeField] private Material tileMaterial;
     [SerializeField] private Material hoverMaterial;
-    [SerializeField] private float tileSize = 1.0f;
+  //  [SerializeField] private float tileSize = 1.0f;
     [SerializeField] private float yOffset = 0.2f;
     [SerializeField] private Vector2 boardCenter = Vector2.zero;
 
