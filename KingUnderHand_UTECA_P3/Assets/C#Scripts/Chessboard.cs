@@ -8,11 +8,17 @@ public class Chessboard : MonoBehaviour
     [Header("Art Stuff")]
     [SerializeField] private Material tileMaterial;
     [SerializeField] private Material hoverMaterial;
-  //  [SerializeField] private float tileSize = 1.0f;
+    [SerializeField] private float tileSize = 1.0f;
     [SerializeField] private float yOffset = 0.2f;
     [SerializeField] private Vector2 boardCenter = Vector2.zero;
 
+    [Header("Prefabs & Materiales")]
+    [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private Material[] teamMatrial;
+
     // LOGIC 
+    private ChessPiece[,] chessPieces;
+    private ChessPiece currentlyDragging;
     private const int TILE_COUNT_X = 4;
     private const int TILE_COUNT_Y = 4;
     private GameObject[,] tiles;
@@ -55,6 +61,33 @@ public class Chessboard : MonoBehaviour
                 currentHover = hitPosition;
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (chessPieces[hitPosition.x, hitPosition.y] != null)
+                {
+                    //Es nuestro turno?
+                    if (true)
+                    {
+                        currentlyDragging = chessPieces[hitPosition.x, hitPosition.y];
+                    }
+
+                }
+               }
+                              
+            
+
+            if (currentlyDragging != null && Input.GetMouseButtonUp(0))
+            {
+                Vector2Int previousPostion = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
+
+                bool validMove = MoveTo(currentlyDragging, hitPosition.x,hitPosition.y);
+                if(!validMove)
+                {
+                    currentlyDragging.transform.position = GetTileCenter(previousPostion.x, previousPostion.y);
+
+                }
+            }
         }
 
         else
@@ -67,6 +100,8 @@ public class Chessboard : MonoBehaviour
             }
         }
     }
+
+   
 
     //Crear Tablero
     private void GenerateAllTiles(float tileSizeX, float tileSizeY, int tileCountX, int tileCountY) //Creacion de todos los recuadros
@@ -111,7 +146,43 @@ public class Chessboard : MonoBehaviour
         return tileObject;
     }
 
+    
+
+    //Posicionando las cartas
+    private void PositionAllPieces()
+    {
+        for (int x = 0; x < TILE_COUNT_X; x++)
+            for (int y = 0; y < TILE_COUNT_Y; y++)
+                if (chessPieces[x, y] != null)
+                    PositionSinglePiece(x, y, true);
+    }
+
+    private void PositionSinglePiece(int x, int y, bool force = false)
+    {
+        chessPieces[x, y].currentX = x;
+        chessPieces[x, y].currentY = y;
+        chessPieces[x, y].transform.position = new Vector2(x * tileSize, y * tileSize);
+    }
+    private Vector2 GetTileCenter(int x, int y) //Consigue el centro delos recuadros
+    {
+        return new Vector2(x * tileSize, y * tileSize) + new Vector2(tileSize / 2, tileSize / 2);
+    }
+
     //Operaciones
+    #region  
+
+    private bool MoveTo(ChessPiece cp, int x, int y) //movimiento
+    {
+        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+
+        chessPieces[x, y] = cp;
+        chessPieces[previousPosition.x, previousPosition.y] = null;
+
+        PositionSinglePiece(x, y);
+
+        return true;
+
+    }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
         for (int x = 0; x < TILE_COUNT_X; x++)
@@ -122,4 +193,6 @@ public class Chessboard : MonoBehaviour
 
 
     }
+    #endregion
+
 }

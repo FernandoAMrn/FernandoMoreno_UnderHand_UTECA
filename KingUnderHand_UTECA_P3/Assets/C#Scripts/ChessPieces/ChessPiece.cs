@@ -19,4 +19,6 @@ public class ChessPiece : MonoBehaviour
     private Vector2 desiredPosition;
     private Vector2 desiredScale;
 
+
+
 }
