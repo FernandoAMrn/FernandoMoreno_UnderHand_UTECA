@@ -17,7 +17,8 @@ public class Chessboard : MonoBehaviour
     [SerializeField] private Material[] teamMatrial;
 
     // LOGIC 
-    private ChessPiece[,] chessPieces;
+    public ChessPiece[,] chessPieces;
+    private List<Vector2Int> availableMoves = new List<Vector2Int>();
     private ChessPiece currentlyDragging;
     private const int TILE_COUNT_X = 4;
     private const int TILE_COUNT_Y = 4;
@@ -70,10 +71,14 @@ public class Chessboard : MonoBehaviour
                     if (true)
                     {
                         currentlyDragging = chessPieces[hitPosition.x, hitPosition.y];
+
+                        //Consigue lista de jugadas validas, cambia el color de las casillas apropiadas.
+                        availableMoves = currentlyDragging.GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+                        HighlightTiles();
                     }
 
                 }
-               }
+            }
                               
             
 
@@ -167,7 +172,24 @@ public class Chessboard : MonoBehaviour
     {
         return new Vector2(x * tileSize, y * tileSize) + new Vector2(tileSize / 2, tileSize / 2);
     }
+    //HilightTiles
+    private void HighlightTiles()
+    {
+        for (int i = 0; i < availableMoves.Count; i++)
+        {
+            tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Highlight");
+        }
+    }
 
+    private void RemoveHighlightTiles()
+    {
+        for (int i = 0; i < availableMoves.Count; i++)
+        {
+            tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Tile");
+
+            availableMoves.Clear();
+        }
+    }
     //Operaciones
     #region  
 
