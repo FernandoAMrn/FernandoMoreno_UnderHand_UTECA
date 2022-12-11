@@ -65,6 +65,7 @@ public class Chessboard : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                chessPieces = new ChessPiece[4, 4];
                 if (chessPieces[hitPosition.x, hitPosition.y] != null)
                 {
                     //Es nuestro turno?
@@ -156,6 +157,7 @@ public class Chessboard : MonoBehaviour
     //Posicionando las cartas
     private void PositionAllPieces()
     {
+        
         for (int x = 0; x < TILE_COUNT_X; x++)
             for (int y = 0; y < TILE_COUNT_Y; y++)
                 if (chessPieces[x, y] != null)
