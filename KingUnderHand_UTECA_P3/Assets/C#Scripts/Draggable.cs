@@ -8,9 +8,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     
     public Transform parentToReturnTo = null;
     public bool isBlackTurn;
+    public bool isMoving;
 
     private void Start()
     {
+        isMoving = false;
         isBlackTurn = true;
     }
 
@@ -24,9 +26,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //Debug.Log("OnBeginDrag");
         if (isBlackTurn == true)
         {
+            isMoving = true;
             parentToReturnTo = this.transform.parent;
             this.transform.SetParent(this.transform.parent.parent);
             GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+            
         }
         else
         {
@@ -41,6 +46,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         //Debug.Log("OnDrag");
         if (isBlackTurn == true)
         {
+
             this.transform.position = eventData.position;
         }
         else
@@ -56,8 +62,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (isBlackTurn == true)
         {
+            isMoving = false;
             this.transform.SetParent(parentToReturnTo);
             GetComponent<CanvasGroup>().blocksRaycasts = true;
+            
         }
         else
         {
