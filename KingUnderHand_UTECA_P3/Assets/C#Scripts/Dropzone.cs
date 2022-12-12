@@ -24,5 +24,13 @@ public class Dropzone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             d.parentToReturnTo = this.transform;
         }
+
+        Draggable_W e = eventData.pointerDrag.GetComponent<Draggable_W>();
+        if (e != null)
+        {
+            e.parentToReturnTo = this.transform;
+        }
     }
+
+    
 }

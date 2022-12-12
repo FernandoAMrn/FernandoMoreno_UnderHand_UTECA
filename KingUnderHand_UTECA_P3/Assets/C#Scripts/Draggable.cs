@@ -8,7 +8,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Transform parentToReturnTo = null;
    public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+        //Debug.Log("OnBeginDrag");
         parentToReturnTo = this.transform.parent;
         this.transform.SetParent(this.transform.parent.parent);
 
@@ -23,10 +23,21 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
         this.transform.SetParent(parentToReturnTo);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.tag == "WhiteCard")
+        {
+            Debug.Log("Coliding with white card");
+            this.transform.SetParent(parentToReturnTo);
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
     }
 }
