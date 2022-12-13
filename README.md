@@ -24,4 +24,4 @@ Si es tu turno puedes atacar a la carta enemiga (Presionando espacio 1 vez) o, t
 Pero, si te decides quedar en el duelo, al terminar la ronda puedes ser atacado inmediatamente sin que tu enemigo tenga que gastar su mana. 
 
 Tu mana se regenerara automaticamente cada ronda.
-Buena suerte y asegurate de que tu enemigo no tenga un rey bajo la manda.
+Buena suerte y asegurate de que tu enemigo no tenga un rey bajo la manga.
