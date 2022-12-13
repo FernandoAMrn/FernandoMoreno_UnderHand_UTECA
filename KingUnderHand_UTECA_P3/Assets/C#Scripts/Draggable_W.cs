@@ -9,6 +9,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public Transform parentToReturnTo = null;
     public bool isWhiteTurn;
     public bool isMoving;
+    public W_ManaContainer mana;
 
     private void start()
     {
@@ -23,7 +24,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isWhiteTurn == true)
+        if (isWhiteTurn == true &&mana.mana >= 1)
         {
             //Debug.Log("OnBeginDrag");
             isMoving = true;
@@ -41,7 +42,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (isWhiteTurn == true)
+        if (isWhiteTurn == true && mana.mana >= 1)
         {
             //Debug.Log("OnDrag");
             isMoving = true;
@@ -58,7 +59,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         //Debug.Log("OnEndDrag");
 
-        if (isWhiteTurn == true)
+        if (isWhiteTurn == true )
         {
             isMoving = false;
             this.transform.SetParent(parentToReturnTo);

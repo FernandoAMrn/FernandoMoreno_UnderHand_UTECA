@@ -22,7 +22,7 @@ public class W_King : MonoBehaviour
     public Draggable draggable6;
     public bool isPressingButton;
 
-
+    
 
 
     // Start is called before the first frame update
@@ -67,6 +67,7 @@ public class W_King : MonoBehaviour
         if (health <= 0)
         {
             panel.SetActive(true);
+            
         }
     }
 

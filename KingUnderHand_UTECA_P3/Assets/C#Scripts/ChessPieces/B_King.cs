@@ -68,6 +68,7 @@ public class B_King : MonoBehaviour
         if (health <= 0)
         {
             panel.SetActive(true);
+            
         }
     }
 

@@ -10,6 +10,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Transform parentToReturnTo = null;
     public bool isBlackTurn;
     public bool isMoving;
+    public ManaContainer mana;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("OnBeginDrag");
-        if (isBlackTurn == true)
+        if (isBlackTurn == true && mana.mana >=1 )
         {
             isMoving = true;
             parentToReturnTo = this.transform.parent;
@@ -42,11 +43,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData )
     {
         
         //Debug.Log("OnDrag");
-        if (isBlackTurn == true)
+        if (isBlackTurn == true && mana.mana >= 1)
         {
             isMoving = true;
             this.transform.position = eventData.position;
@@ -62,7 +63,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         //Debug.Log("OnEndDrag");
 
-        if (isBlackTurn == true)
+        if (isBlackTurn == true )
         {
             isMoving = false;
             this.transform.SetParent(parentToReturnTo);
