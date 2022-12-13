@@ -63,37 +63,37 @@ public class Chessboard : MonoBehaviour
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                chessPieces = new ChessPiece[4, 4];
-                if (chessPieces[hitPosition.x, hitPosition.y] != null)
-                {
-                    //Es nuestro turno?
-                    if (true)
-                    {
-                        currentlyDragging = chessPieces[hitPosition.x, hitPosition.y];
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    chessPieces = new ChessPiece[4, 4];
+            //    if (chessPieces[hitPosition.x, hitPosition.y] != null)
+            //    {
+            //        //Es nuestro turno?
+            //        if (true)
+            //        {
+            //            currentlyDragging = chessPieces[hitPosition.x, hitPosition.y];
 
-                        //Consigue lista de jugadas validas, cambia el color de las casillas apropiadas.
-                        availableMoves = currentlyDragging.GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
-                        HighlightTiles();
-                    }
+            //            //Consigue lista de jugadas validas, cambia el color de las casillas apropiadas.
+            //            availableMoves = currentlyDragging.GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+            //            HighlightTiles();
+            //        }
 
-                }
-            }
+            //    }
+            //}
                               
             
 
-            if (currentlyDragging != null && Input.GetMouseButtonUp(0))
-            {
-                Vector2Int previousPostion = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
+            //if (currentlyDragging != null && Input.GetMouseButtonUp(0))
+            //{
+            //    Vector2Int previousPostion = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
 
-                bool validMove = MoveTo(currentlyDragging, hitPosition.x,hitPosition.y);
-                if(!validMove)
-                {
-                    currentlyDragging.transform.position = GetTileCenter(previousPostion.x, previousPostion.y);
+            //    bool validMove = MoveTo(currentlyDragging, hitPosition.x,hitPosition.y);
+            //    if(!validMove)
+            //    {
+            //        currentlyDragging.transform.position = GetTileCenter(previousPostion.x, previousPostion.y);
 
-                }
-            }
+            //    }
+            //}
         }
 
         else
@@ -152,61 +152,61 @@ public class Chessboard : MonoBehaviour
         return tileObject;
     }
 
-    
+
 
     //Posicionando las cartas
-    private void PositionAllPieces()
-    {
-        
-        for (int x = 0; x < TILE_COUNT_X; x++)
-            for (int y = 0; y < TILE_COUNT_Y; y++)
-                if (chessPieces[x, y] != null)
-                    PositionSinglePiece(x, y, true);
-    }
+    //private void PositionAllPieces()
+    //{
 
-    private void PositionSinglePiece(int x, int y, bool force = false)
-    {
-        chessPieces[x, y].currentX = x;
-        chessPieces[x, y].currentY = y;
-        chessPieces[x, y].transform.position = new Vector2(x * tileSize, y * tileSize);
-    }
-    private Vector2 GetTileCenter(int x, int y) //Consigue el centro delos recuadros
-    {
-        return new Vector2(x * tileSize, y * tileSize) + new Vector2(tileSize / 2, tileSize / 2);
-    }
+    //    for (int x = 0; x < TILE_COUNT_X; x++)
+    //        for (int y = 0; y < TILE_COUNT_Y; y++)
+    //            if (chessPieces[x, y] != null)
+    //                PositionSinglePiece(x, y, true);
+    //}
+
+    //private void PositionSinglePiece(int x, int y, bool force = false)
+    //{
+    //    chessPieces[x, y].currentX = x;
+    //    chessPieces[x, y].currentY = y;
+    //    chessPieces[x, y].transform.position = new Vector2(x * tileSize, y * tileSize);
+    //}
+    //private Vector2 GetTileCenter(int x, int y) //Consigue el centro delos recuadros
+    //{
+    //    return new Vector2(x * tileSize, y * tileSize) + new Vector2(tileSize / 2, tileSize / 2);
+    //}
     //HilightTiles
-    private void HighlightTiles()
-    {
-        for (int i = 0; i < availableMoves.Count; i++)
-        {
-            tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Highlight");
-        }
-    }
+    //private void HighlightTiles()
+    //{
+    //    for (int i = 0; i < availableMoves.Count; i++)
+    //    {
+    //        tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Highlight");
+    //    }
+    //}
 
-    private void RemoveHighlightTiles()
-    {
-        for (int i = 0; i < availableMoves.Count; i++)
-        {
-            tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Tile");
+    //private void RemoveHighlightTiles()
+    //{
+    //    for (int i = 0; i < availableMoves.Count; i++)
+    //    {
+    //        tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Tile");
 
-            availableMoves.Clear();
-        }
-    }
+    //        availableMoves.Clear();
+    //    }
+    //}
     //Operaciones
     #region  
 
-    private bool MoveTo(ChessPiece cp, int x, int y) //movimiento
-    {
-        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+    //private bool MoveTo(ChessPiece cp, int x, int y) //movimiento
+    //{
+    //    Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
 
-        chessPieces[x, y] = cp;
-        chessPieces[previousPosition.x, previousPosition.y] = null;
+    //    chessPieces[x, y] = cp;
+    //    chessPieces[previousPosition.x, previousPosition.y] = null;
 
-        PositionSinglePiece(x, y);
+    //    PositionSinglePiece(x, y);
 
-        return true;
+    //    return true;
 
-    }
+    //}
     private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
         for (int x = 0; x < TILE_COUNT_X; x++)

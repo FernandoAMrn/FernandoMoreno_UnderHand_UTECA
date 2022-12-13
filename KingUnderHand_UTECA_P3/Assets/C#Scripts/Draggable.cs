@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+
     
     public Transform parentToReturnTo = null;
     public bool isBlackTurn;
@@ -43,10 +44,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
+        
         //Debug.Log("OnDrag");
         if (isBlackTurn == true)
         {
-
+            isMoving = true;
             this.transform.position = eventData.position;
         }
         else

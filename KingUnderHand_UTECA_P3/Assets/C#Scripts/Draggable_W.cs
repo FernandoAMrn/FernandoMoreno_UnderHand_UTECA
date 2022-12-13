@@ -8,9 +8,11 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     
     public Transform parentToReturnTo = null;
     public bool isWhiteTurn;
+    public bool isMoving;
 
     private void start()
     {
+        isMoving = true;
         isWhiteTurn = false;
     }
 
@@ -24,6 +26,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (isWhiteTurn == true)
         {
             //Debug.Log("OnBeginDrag");
+            isMoving = true;
             parentToReturnTo = this.transform.parent;
             this.transform.SetParent(this.transform.parent.parent);
             GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -41,6 +44,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (isWhiteTurn == true)
         {
             //Debug.Log("OnDrag");
+            isMoving = true;
             this.transform.position = eventData.position;
         }
         else
@@ -56,6 +60,7 @@ public class Draggable_W : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         if (isWhiteTurn == true)
         {
+            isMoving = false;
             this.transform.SetParent(parentToReturnTo);
             GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
