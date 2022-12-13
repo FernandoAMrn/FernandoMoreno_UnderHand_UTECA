@@ -12,7 +12,7 @@ Al comenzar la partida puedes colocar tus cartas en la primera hilera de cartas 
 Una vez colocadas todas tus cartas cambia de turno para que tu oponente pueda colocar las suyas pero recuerda que cada carta tiene un costo distinto de mana.
 
 
-El objetivo es atacar al rey oponente. Para hacerle daño debes llegar a la primera hilera enemiga y si es tu turno (presiona espacio para dañarlo)
+El objetivo es atacar al rey oponente. Para hacerle daño debes llegar a la primera hilera enemiga y si es tu turno (presiona espacio una vez para dañarlo)
 
 Si la vida del rey enemigo llega a 0 ganas el juego.
 Tus cartas se pueden mover libremente pero ten cuidado con dejar indefenso a tu propio rey y no utilizar toda tu energia.
